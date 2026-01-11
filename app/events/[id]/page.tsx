@@ -7,6 +7,7 @@ import Footer from '@/components/Footer';
 import { api } from '@/lib/api';
 import { Event, Comment, User } from '@/lib/types';
 import { useAuth } from '@/contexts/AuthContext';
+import AddToCalendar from '@/components/AddToCalendar';
 
 export default function EventDetailPage() {
   const params = useParams();
@@ -28,7 +29,7 @@ export default function EventDetailPage() {
     try {
       setLoading(true);
       setError('');
-      
+
       // Charger l'événement
       const eventResponse = await api.get<any>(`/events/${params.id}`);
       const eventData = eventResponse.data?.event || eventResponse.data;
@@ -49,11 +50,11 @@ export default function EventDetailPage() {
           );
           const participantsData = participantsResponse.data?.participants || participantsResponse.data || [];
           const participantsList = Array.isArray(participantsData) ? participantsData : [];
-          
+
           // L'API retourne des objets avec { user: {...} }, on extrait les users
           const users = participantsList.map((p: any) => p.user || p);
           setParticipants(users);
-          
+
           // Vérifier si l'utilisateur a rejoint l'événement
           const hasJoined = users.some((p: User) => p.id === user.id);
           setIsJoined(hasJoined);
@@ -82,7 +83,7 @@ export default function EventDetailPage() {
     try {
       setError('');
       await api.post(`/events/${params.id}/join`);
-      
+
       // Recharger immédiatement les données
       await loadEventData();
     } catch (err: any) {
@@ -99,7 +100,7 @@ export default function EventDetailPage() {
     try {
       setError('');
       await api.delete(`/events/${params.id}/leave`);
-      
+
       // Recharger immédiatement les données
       await loadEventData();
     } catch (err: any) {
@@ -109,7 +110,7 @@ export default function EventDetailPage() {
 
   const handleAddComment = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!isAuthenticated) {
       router.push('/login');
       return;
@@ -290,7 +291,7 @@ export default function EventDetailPage() {
               {/* Détails */}
               <div className="card p-8">
                 <h2 className="text-2xl mb-6">Détails</h2>
-                
+
                 <div className="space-y-4">
                   <div className="flex items-start gap-4">
                     <svg className="w-6 h-6 text-primary mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -326,8 +327,8 @@ export default function EventDetailPage() {
                           {event.minAge && event.maxAge
                             ? `${event.minAge} - ${event.maxAge} ans`
                             : event.minAge
-                            ? `${event.minAge} ans et plus`
-                            : `Jusqu'à ${event.maxAge} ans`}
+                              ? `${event.minAge} ans et plus`
+                              : `Jusqu'à ${event.maxAge} ans`}
                         </p>
                       </div>
                     </div>
@@ -455,7 +456,7 @@ export default function EventDetailPage() {
                     >
                       Modifier
                     </button>
-                    <button 
+                    <button
                       onClick={handleCancelEvent}
                       className="w-full px-6 py-3 border-2 border-red-500 text-red-500 hover:bg-red-500 hover:text-white font-medium rounded-2xl transition-colors"
                     >
@@ -485,7 +486,7 @@ export default function EventDetailPage() {
                 )}
 
                 {isAuthenticated && !isOrganizer && (
-                  <button 
+                  <button
                     onClick={handleReportEvent}
                     className="w-full mt-3 text-gray-600 hover:text-red-500 text-sm transition-colors"
                   >
@@ -493,6 +494,9 @@ export default function EventDetailPage() {
                   </button>
                 )}
               </div>
+
+              {/* Ajouter au calendrier */}
+              {isJoined && <AddToCalendar event={event} />}
 
               {/* Organisateur */}
               {event.organizer && (
