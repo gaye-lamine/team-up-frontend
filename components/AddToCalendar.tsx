@@ -64,41 +64,41 @@ export default function AddToCalendar({ event }: AddToCalendarProps) {
                 </h3>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 gap-2">
                 <a
                     href={calendarUrls.google}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group relative flex items-center justify-center gap-3 px-6 py-4 bg-white border border-gray-100 rounded-xl shadow-sm hover:shadow-md hover:border-blue-200 transition-all duration-300 hover:-translate-y-1"
+                    className="group relative flex items-center gap-3 px-4 py-2.5 bg-white border border-gray-100 rounded-xl shadow-sm hover:shadow-md hover:border-blue-200 transition-all duration-300 hover:-translate-y-0.5 w-full"
                 >
                     <img
-                        src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Google_Calendar_icon_%282020%29.svg"
+                        src="https://www.gstatic.com/calendar/images/dynamiclogo_2020q4/calendar_31_2x.png"
                         alt="Google"
-                        className="w-6 h-6 object-contain"
+                        className="w-5 h-5 object-contain"
                     />
-                    <span className="font-semibold text-gray-700 group-hover:text-blue-600 transition-colors">Google</span>
+                    <span className="font-semibold text-sm text-gray-700 group-hover:text-blue-600 transition-colors">Google Calendar</span>
                 </a>
 
                 <a
                     href={calendarUrls.outlook}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group relative flex items-center justify-center gap-3 px-6 py-4 bg-white border border-gray-100 rounded-xl shadow-sm hover:shadow-md hover:border-blue-200 transition-all duration-300 hover:-translate-y-1"
+                    className="group relative flex items-center gap-3 px-4 py-2.5 bg-white border border-gray-100 rounded-xl shadow-sm hover:shadow-md hover:border-blue-200 transition-all duration-300 hover:-translate-y-0.5 w-full"
                 >
                     <img
-                        src="https://upload.wikimedia.org/wikipedia/commons/d/df/Microsoft_Office_Outlook_%282018%E2%80%93present%29.svg"
+                        src="https://res.cdn.office.net/assets/mail/pwa/v1/pngs/apple-touch-icon.png"
                         alt="Outlook"
-                        className="w-6 h-6 object-contain"
+                        className="w-5 h-5 object-contain"
                     />
-                    <span className="font-semibold text-gray-700 group-hover:text-blue-600 transition-colors">Outlook</span>
+                    <span className="font-semibold text-sm text-gray-700 group-hover:text-blue-600 transition-colors">Outlook / Office</span>
                 </a>
 
                 <button
                     onClick={downloadIcs}
-                    className="group relative flex items-center justify-center gap-3 px-6 py-4 bg-white border border-gray-100 rounded-xl shadow-sm hover:shadow-md hover:border-gray-300 transition-all duration-300 hover:-translate-y-1"
+                    className="group relative flex items-center gap-3 px-4 py-2.5 bg-white border border-gray-100 rounded-xl shadow-sm hover:shadow-md hover:border-gray-300 transition-all duration-300 hover:-translate-y-0.5 w-full"
                 >
-                    <span className="text-2xl leading-none">🍏</span>
-                    <span className="font-semibold text-gray-700 group-hover:text-gray-900 transition-colors">Apple / iCal</span>
+                    <span className="text-xl leading-none w-5 text-center">🍏</span>
+                    <span className="font-semibold text-sm text-gray-700 group-hover:text-gray-900 transition-colors">Apple / iCal</span>
                 </button>
             </div>
         </div>
