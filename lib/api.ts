@@ -96,6 +96,14 @@ class ApiClient {
   async delete<T>(endpoint: string): Promise<T> {
     return this.request<T>(endpoint, { method: 'DELETE' });
   }
+
+  async forgotPassword(email: string): Promise<void> {
+    await this.post('/auth/forgot-password', { email });
+  }
+
+  async resetPassword(token: string, password: string): Promise<void> {
+    await this.post('/auth/reset-password', { token, password });
+  }
 }
 
 export const api = new ApiClient(API_URL);
